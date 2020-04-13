@@ -36,13 +36,12 @@ export const context = ({ req, res }: { req: Request; res: Response }): any => {
       const rolesClaim = process.env.API_USER_CLAIM_ROLES || 'roles';
       const token = bearerToken.length === 2 || bearerToken[0].toLowerCase() === 'bearer' ? bearerToken[1] : process.env.API_TOKEN;
       if (token) {
-        req.headers.authorization = `Bearer ${token}`;
         verify(token, secretOrPublicKey, options, (error, user: any) => {
           error !== null ? console.log(error) : res.header('X-User-Id', user[usernameClaim]).header('X-User-Roles', user[rolesClaim]);
         });
       }
     }
   }
-  res.header('X-App-Id', process.env.APP_NAME ?? 'hiberbee');
-  return { res };
+  res.header('X-App-Id', process.env.APP_NAME ?? 'hiberbee-graphql');
+  return { req, res };
 };

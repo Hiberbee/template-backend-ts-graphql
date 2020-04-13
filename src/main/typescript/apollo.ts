@@ -24,7 +24,6 @@
 
 import { Command, program } from 'commander';
 import { ApolloServer, Config } from 'apollo-server';
-import logger from './logger';
 import playgroundSettings from '../resources/playground.settings.json';
 import { cacheControl, createCache } from './cache';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
@@ -78,7 +77,7 @@ export function createGatewayCommand(): Command {
           ...createConfigFromOpts(opts),
           gateway,
           engine: {
-            apiKey: 'service:hiberbee:09XL6KsDGWIwf-8Fmshz3g',
+            apiKey: process.env.ENGINE_API_KEY,
           },
         })
           .listen(opts.port)
@@ -100,7 +99,6 @@ export function createServerCommand(): Command {
           ...createConfigFromOpts(opts),
           dataSources,
           engine: false,
-          extensions: [logger],
           schema: buildFederatedSchema([graphqlModule]),
         })
           .listen(opts.port)

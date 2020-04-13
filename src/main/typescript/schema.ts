@@ -40,7 +40,7 @@ const services: {} = {};
 export const dataSources: () => {} = () => services;
 
 export const gateway = new ApolloGateway({
-  serviceList: [{ name: 'hiberbee', url: 'http://localhost:8000/graphql' }],
+  serviceList: [{ name: 'hiberbee', url: 'http://127.0.0.1:8000/graphql' }],
   debug: false,
   experimental_autoFragmentization: true,
   serviceHealthCheck: true,

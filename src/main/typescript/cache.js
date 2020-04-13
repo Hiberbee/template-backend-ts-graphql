@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /*
  * MIT License
  *
@@ -22,45 +22,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-Object.defineProperty(exports, '__esModule', { value: true });
-var apollo_server_caching_1 = require('apollo-server-caching');
-var apollo_server_cache_redis_1 = require('apollo-server-cache-redis');
-var apollo_server_cache_memcached_1 = require('apollo-server-cache-memcached');
+Object.defineProperty(exports, "__esModule", { value: true });
+var apollo_server_caching_1 = require("apollo-server-caching");
+var apollo_server_cache_redis_1 = require("apollo-server-cache-redis");
+var apollo_server_cache_memcached_1 = require("apollo-server-cache-memcached");
 function createInMemoryCache() {
-  return new apollo_server_caching_1.InMemoryLRUCache();
+    return new apollo_server_caching_1.InMemoryLRUCache();
 }
 function createRedisCache() {
-  var _a, _b, _c;
-  return new apollo_server_cache_redis_1.RedisCache({
-    host: (_a = process.env.REDIS_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost',
-    port: Number.parseInt((_b = process.env.REDIS_SERVICE_PORT) !== null && _b !== void 0 ? _b : '6379'),
-    password: process.env.REDIS_PASSWORD,
-    db: Number.parseInt((_c = process.env.REDIS_DATABASE) !== null && _c !== void 0 ? _c : '0'),
-    enableReadyCheck: true,
-  });
+    var _a, _b, _c;
+    return new apollo_server_cache_redis_1.RedisCache({
+        host: (_a = process.env.REDIS_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost',
+        port: Number.parseInt((_b = process.env.REDIS_SERVICE_PORT) !== null && _b !== void 0 ? _b : '6379'),
+        password: process.env.REDIS_PASSWORD,
+        db: Number.parseInt((_c = process.env.REDIS_DATABASE) !== null && _c !== void 0 ? _c : '0'),
+        enableReadyCheck: true,
+    });
 }
 function createMemcachedCache() {
-  var _a, _b;
-  var url =
-    ((_a = process.env.MEMCACHED_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost') +
-    ':' +
-    ((_b = process.env.MEMCACHED_SERVICE_PORT) !== null && _b !== void 0 ? _b : 11211);
-  return new apollo_server_cache_memcached_1.MemcachedCache(url);
+    var _a, _b;
+    var url = ((_a = process.env.MEMCACHED_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost') + ":" + ((_b = process.env.MEMCACHED_SERVICE_PORT) !== null && _b !== void 0 ? _b : 11211);
+    return new apollo_server_cache_memcached_1.MemcachedCache(url);
 }
 exports.cacheControl = {
-  defaultMaxAge: 0,
-  stripFormattedExtensions: false,
+    defaultMaxAge: 0,
+    stripFormattedExtensions: false,
 };
 function createCache(storage) {
-  switch (storage) {
-    case 'memcached':
-      return createMemcachedCache();
-    case 'redis':
-      return createRedisCache();
-    case 'memory':
-    case undefined:
-    default:
-      return createInMemoryCache();
-  }
+    switch (storage) {
+        case 'memcached':
+            return createMemcachedCache();
+        case 'redis':
+            return createRedisCache();
+        case 'memory':
+        case undefined:
+        default:
+            return createInMemoryCache();
+    }
 }
 exports.createCache = createCache;
