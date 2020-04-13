@@ -1,0 +1,21 @@
+apiVersion: v2
+name: graphql
+description: GraphQL Gateway & Fake API chart
+type: application
+version: 1.0.0
+appVersion: 2.12.0
+icon: https://i0.wp.com/blog.knoldus.com/wp-content/uploads/2019/06/graphql.png?fit=600%2C600&ssl=1
+sources:
+  - https://github.com/hiberbee/graphql-kit
+maintainers:
+  - name: Vlad Volkov
+    email: vlad@hiberbee.com
+    url: https://github.com/vladyslavvolkov
+home: https://github.com/hiberbee/graphql-kit
+kubeVersion: v1.16
+keywords:
+  - api
+  - apollo
+  - faker
+  - graphql
+  - nodejs

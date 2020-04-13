@@ -1,0 +1,28 @@
+{{- $name := include "metadata.name" . }}
+{{- $host := printf "%s.%s" $name .Values.ingress.host  }}
+{{- with .Values.ingress }}
+  {{- if .enabled }} # @formatter:on
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $name }}
+  labels: {{ include "metadata.labels" $ | indent 4 }}
+  annotations:
+    {{- toYaml .annotations | nindent 4 }}
+spec:
+  rules: {{ range $name,$value := $.Values.applications }}
+    - host: {{ $host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ $name }}
+              servicePort: {{ $value.port }} {{ end }}
+  {{- if .tls.enabled }}
+  tls:
+    - secretName: {{ default $host .tls.secretName  }}
+      hosts: {{ range $i,$value := $.Values.applications }}
+        - {{ $host }} {{ end }} {{ end }} # @formatter:off
+  {{- end }}
+{{- end }}
+

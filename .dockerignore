@@ -1,0 +1,10 @@
+*gradle*
+*.log
+*ignore
+.editorconfig
+.env*
+.git*
+.idea
+build
+node_modules
+templates

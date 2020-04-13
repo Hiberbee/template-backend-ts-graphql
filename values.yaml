@@ -1,0 +1,69 @@
+nameOverride: ""
+fullnameOverride: ""
+
+replicas: 1
+
+image:
+  registry: docker.io
+  repository: hiberbee/graphql-kit
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+workingDir: /usr/local/src
+
+environment: production
+
+applications:
+  faker:
+    port: 9000
+    command: "start:faker"
+  server:
+    port: 8000
+    command: "start:server"
+  gateway:
+    port: 4000
+    command: "start:gateway"
+
+env:
+  NODE_ENV: production
+  API_USER_CLAIM_ID: username
+  API_USER_CLAIM_ROLES: roles
+  JWT_ALGORITHM: HS512
+
+service:
+  port: 4000
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  className: nginx
+  host: hiberbee.com
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls:
+    enabled: true
+    secretName: ''
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+podAnnotations: {}
+
+resources: {}
+#  limits:
+#    cpu: 150m
+#    memory: 250Mi
+#  requests:
+#    cpu: 100m
+#    memory: 200Mi
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  runAsNonRoot: true
+  fsGroup: 1000

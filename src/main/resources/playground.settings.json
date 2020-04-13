@@ -1,0 +1,17 @@
+{
+  "editor.cursorShape": "line",
+  "editor.fontFamily": "'Fira Code', 'Hack', 'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace",
+  "editor.fontSize": 12,
+  "editor.reuseHeaders": true,
+  "editor.theme": "light",
+  "general.betaUpdates": true,
+  "prettier.printWidth": 140,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "request.credentials": "omit",
+  "schema.disableComments": true,
+  "schema.polling.enable": false,
+  "schema.polling.endpointFilter": "*localhost*",
+  "tracing.hideTracingResponse": false,
+  "queryPlan.hideQueryPlanResponse": false
+}

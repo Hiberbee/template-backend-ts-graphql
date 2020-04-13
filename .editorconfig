@@ -1,0 +1,19 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = tab
+indent_style = space
+insert_final_newline = true
+max_line_length = 140
+tab_width = 2
+trim_trailing_whitespace = true
+ij_any_use_relative_indents = true
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = true
+
+[{*.neon, .gitmodules, Caddyfile, config, .gitconfig, ssh_config}]
+indent_style = tab
+tab_width = 4

@@ -1,0 +1,25 @@
+schema:
+  - src/main/graphql/gateway/schema.graphql
+config:
+  maybeValue: T
+  skipTypename: false
+  preResolveTypes: true
+  avoidOptionals: false
+  declarationKind:
+    type: interface
+    input: interface
+  federation: true
+  flattenGeneratedTypes: true
+  scalars:
+    DateTime: Date
+  namingConvention:
+    enumValues: change-case#camelCase
+    typeNames: change-case#pascalCase
+generates:
+  ./src/main/typescript/types.ts:
+    plugins:
+      - typescript
+hooks:
+  afterOneFileWrite:
+    - prettier --write
+    - eslint --fix --quiet

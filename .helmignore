@@ -1,0 +1,16 @@
+*.js
+*.json
+*.log
+*gradle*
+*ignore
+.*rc
+.env*
+.git*
+.idea
+Dockerfile
+build
+codegen.yml
+node_modules
+src
+*.md
+.editorconfig

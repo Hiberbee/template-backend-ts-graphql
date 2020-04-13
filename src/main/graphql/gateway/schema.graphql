@@ -1,0 +1,18 @@
+schema {
+  query: Query
+}
+
+type Query {
+  app: _Application
+  me: _User
+}
+
+type _Application {
+  id: ID!
+  version: String
+}
+
+type _User {
+  id: ID
+  roles: [String]
+}

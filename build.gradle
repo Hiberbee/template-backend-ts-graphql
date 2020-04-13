@@ -1,0 +1,40 @@
+plugins {
+  id("idea")
+  id("org.sonarqube") version "2.8"
+  id("org.jetbrains.gradle.plugin.idea-ext") version "0.7"
+  id("java-library")
+}
+wrapper {
+  distributionType = Wrapper.DistributionType.ALL
+  gradleVersion = "6.3"
+}
+java {
+  targetCompatibility = JavaVersion.VERSION_11
+  sourceCompatibility = JavaVersion.VERSION_11
+}
+idea {
+  project {
+    settings {
+      copyright {
+        useDefault = "Hiberbee"
+        profiles {
+          Hiberbee {
+            notice = file("LICENSE").readLines().join("\n")
+          }
+        }
+      }
+    }
+  }
+  module {
+    excludeDirs += files("build", "gradle", ".gradle")
+    sourceDirs += files("src/main/typescript", "src/main/graphql")
+  }
+}
+sonarqube {
+  properties {
+    property "sonar.scm.provider", "git"
+    property "sonar.organization", "hiberbee"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.login", System.getenv("SONARQUBE_TOKEN")
+  }
+}

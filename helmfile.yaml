@@ -1,0 +1,6 @@
+releases:
+  - name: gateway
+    namespace: default
+    chart: .
+    cleanupOnFail: false
+    kubeContext: do-fra1-k8s-hiberbee-dev
