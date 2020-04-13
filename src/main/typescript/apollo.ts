@@ -34,7 +34,7 @@ import { buildFederatedSchema } from '@apollo/federation';
 /**
  * @return Config
  */
-function createConfigFromOpts(opts: any & { port: number; storage: undefined | 'memcached' | 'memory' | 'redis' }): Config {
+function createConfigFromOpts(opts: any): Config {
   const cache = createCache(opts.storage);
   return {
     cache,
