@@ -23,9 +23,9 @@
  * SOFTWARE.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var apollo_server_caching_1 = require("apollo-server-caching");
-var apollo_server_cache_redis_1 = require("apollo-server-cache-redis");
-var apollo_server_cache_memcached_1 = require("apollo-server-cache-memcached");
+const apollo_server_caching_1 = require("apollo-server-caching");
+const apollo_server_cache_redis_1 = require("apollo-server-cache-redis");
+const apollo_server_cache_memcached_1 = require("apollo-server-cache-memcached");
 function createInMemoryCache() {
     return new apollo_server_caching_1.InMemoryLRUCache();
 }
@@ -41,7 +41,7 @@ function createRedisCache() {
 }
 function createMemcachedCache() {
     var _a, _b;
-    var url = ((_a = process.env.MEMCACHED_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost') + ":" + ((_b = process.env.MEMCACHED_SERVICE_PORT) !== null && _b !== void 0 ? _b : 11211);
+    const url = `${(_a = process.env.MEMCACHED_SERVICE_HOST) !== null && _a !== void 0 ? _a : 'localhost'}:${(_b = process.env.MEMCACHED_SERVICE_PORT) !== null && _b !== void 0 ? _b : 11211}`;
     return new apollo_server_cache_memcached_1.MemcachedCache(url);
 }
 exports.cacheControl = {

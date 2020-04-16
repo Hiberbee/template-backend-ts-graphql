@@ -23,30 +23,34 @@
  * SOFTWARE.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = require("tslib");
-var commander_1 = require("commander");
-var apollo_server_1 = require("apollo-server");
-var playground_settings_json_1 = tslib_1.__importDefault(require("../resources/playground.settings.json"));
-var cache_1 = require("./cache");
-var apollo_server_plugin_response_cache_1 = tslib_1.__importDefault(require("apollo-server-plugin-response-cache"));
-var context_1 = require("./context");
-var schema_1 = require("./schema");
-var federation_1 = require("@apollo/federation");
+const tslib_1 = require("tslib");
+const commander_1 = require("commander");
+const apollo_server_1 = require("apollo-server");
+const playground_settings_json_1 = tslib_1.__importDefault(require("../resources/playground.settings.json"));
+const cache_1 = require("./cache");
+const apollo_server_plugin_response_cache_1 = tslib_1.__importDefault(require("apollo-server-plugin-response-cache"));
+const context_1 = require("./context");
+const schema_1 = require("./schema");
+const federation_1 = require("@apollo/federation");
+function createApolloServer(config) {
+    return new apollo_server_1.ApolloServer(Object.assign(Object.assign({}, config), { dataSources: schema_1.dataSources, engine: false, schema: federation_1.buildFederatedSchema([schema_1.graphqlModule]) }));
+}
+exports.createApolloServer = createApolloServer;
 /**
  * @return Config
  */
 function createConfigFromOpts(opts) {
     var _a;
-    var cache = cache_1.createCache(opts.storage);
+    const cache = cache_1.createCache(opts.storage);
     return {
-        cache: cache,
+        cache,
         cacheControl: cache_1.cacheControl,
         context: context_1.context,
         debug: opts.debug,
         introspection: opts.introspection,
-        persistedQueries: { cache: cache },
+        persistedQueries: { cache },
         playground: (_a = opts.playground) !== null && _a !== void 0 ? _a : { settings: playground_settings_json_1.default },
-        plugins: [apollo_server_plugin_response_cache_1.default({ cache: cache })],
+        plugins: [apollo_server_plugin_response_cache_1.default({ cache })],
         subscriptions: false,
         tracing: opts.tracing,
         uploads: opts.uploads,
@@ -71,12 +75,13 @@ function createGatewayCommand() {
     return decorateWithOptions(commander_1.program
         .createCommand('gateway')
         .description('Start GraphQL API based on Apollo server with schema federatio')
-        .action(function (opts) {
-        new apollo_server_1.ApolloServer(tslib_1.__assign(tslib_1.__assign({}, createConfigFromOpts(opts)), { gateway: schema_1.gateway, engine: {
+        .action((opts) => {
+        const config = Object.assign(Object.assign({}, createConfigFromOpts(opts)), { gateway: schema_1.gateway, engine: {
                 apiKey: process.env.ENGINE_API_KEY,
-            } }))
+            } });
+        createApolloServer(config)
             .listen(opts.port)
-            .then(function (info) { return console.log("\uD83D\uDE80 Apollo Gateway is running " + info.url); });
+            .then((info) => console.log(`🚀 Apollo Gateway is running ${info.url}`));
     }));
 }
 exports.createGatewayCommand = createGatewayCommand;
@@ -87,10 +92,8 @@ function createServerCommand() {
     return decorateWithOptions(commander_1.program
         .createCommand('server')
         .description('Start GraphQL API based on Apollo server with schema federatio')
-        .action(function (opts) {
-        new apollo_server_1.ApolloServer(tslib_1.__assign(tslib_1.__assign({}, createConfigFromOpts(opts)), { dataSources: schema_1.dataSources, engine: false, schema: federation_1.buildFederatedSchema([schema_1.graphqlModule]) }))
-            .listen(opts.port)
-            .then(function (info) { return console.log("\uD83D\uDE80 Apollo Server is running " + info.url); });
-    }));
+        .action((opts) => createApolloServer(createConfigFromOpts(opts))
+        .listen(opts.port)
+        .then((info) => console.log(`🚀 Apollo Server is running ${info.url}`))));
 }
 exports.createServerCommand = createServerCommand;

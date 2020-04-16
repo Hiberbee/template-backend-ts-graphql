@@ -23,26 +23,25 @@
  * SOFTWARE.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var jsonwebtoken_1 = require("jsonwebtoken");
-exports.context = function (_a) {
-    var req = _a.req, res = _a.res;
-    var _b, _c;
-    var authHeader = req.headers.authorization || '';
+const jsonwebtoken_1 = require("jsonwebtoken");
+exports.context = ({ req, res }) => {
+    var _a, _b;
+    const authHeader = req.headers.authorization || '';
     if (authHeader !== '') {
-        var bearerToken = authHeader.split(' ');
-        var secretOrPublicKey = (_b = process.env.API_KEY) !== null && _b !== void 0 ? _b : '';
+        const bearerToken = authHeader.split(' ');
+        const secretOrPublicKey = (_a = process.env.API_KEY) !== null && _a !== void 0 ? _a : '';
         if (secretOrPublicKey) {
-            var options = { algorithms: [process.env.JWT_ALGORITHM || 'HS512'] };
-            var usernameClaim_1 = process.env.API_USER_CLAIM_ID || 'username';
-            var rolesClaim_1 = process.env.API_USER_CLAIM_ROLES || 'roles';
-            var token = bearerToken.length === 2 || bearerToken[0].toLowerCase() === 'bearer' ? bearerToken[1] : process.env.API_TOKEN;
+            const options = { algorithms: [process.env.JWT_ALGORITHM || 'HS512'] };
+            const usernameClaim = process.env.API_USER_CLAIM_ID || 'username';
+            const rolesClaim = process.env.API_USER_CLAIM_ROLES || 'roles';
+            const token = bearerToken.length === 2 || bearerToken[0].toLowerCase() === 'bearer' ? bearerToken[1] : process.env.API_TOKEN;
             if (token) {
-                jsonwebtoken_1.verify(token, secretOrPublicKey, options, function (error, user) {
-                    error !== null ? console.log(error) : res.header('X-User-Id', user[usernameClaim_1]).header('X-User-Roles', user[rolesClaim_1]);
+                jsonwebtoken_1.verify(token, secretOrPublicKey, options, (error, user) => {
+                    error !== null ? console.log(error) : res.header('X-User-Id', user[usernameClaim]).header('X-User-Roles', user[rolesClaim]);
                 });
             }
         }
     }
-    res.header('X-App-Id', (_c = process.env.APP_NAME) !== null && _c !== void 0 ? _c : 'hiberbee-graphql');
-    return { req: req, res: res };
+    res.header('X-App-Id', (_b = process.env.APP_NAME) !== null && _b !== void 0 ? _b : 'hiberbee-graphql');
+    return { req, res };
 };

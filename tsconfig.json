@@ -18,8 +18,9 @@
     "strict": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ES5"
+    "target": "ES6",
+    "rootDirs": ["src"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "templates", "build", "src/main/graphql"]
 }

@@ -26,18 +26,15 @@
 import { GraphQLSchemaModule } from 'apollo-graphql';
 import { Query, Application, User } from './types';
 import { gql } from 'apollo-server';
-import fs from 'fs';
 import { Response } from 'express';
-import path from 'path';
 import { ApolloGateway } from '@apollo/gateway';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const schema = require('../graphql/gateway/schema.graphql');
-export const typeDefs = gql`
-  ${schema}
-`;
-const services: {} = {};
+const typeDefs = gql(require('../graphql/gateway/schema.graphql'));
 
 export const dataSources: () => {} = () => services;
+
+const services: {} = {};
 
 export const gateway = new ApolloGateway({
   serviceList: [{ name: 'hiberbee', url: 'http://127.0.0.1:8000/graphql' }],

@@ -23,14 +23,22 @@
  */
 
 import { Command, program } from 'commander';
+import { buildFederatedSchema } from '@apollo/federation';
 import { ApolloServer, Config } from 'apollo-server';
 import playgroundSettings from '../resources/playground.settings.json';
 import { cacheControl, createCache } from './cache';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import { context } from './context';
 import { dataSources, graphqlModule, gateway } from './schema';
-import { buildFederatedSchema } from '@apollo/federation';
 
+export function createApolloServer(config: Config): ApolloServer {
+  return new ApolloServer({
+    ...config,
+    dataSources,
+    engine: false,
+    schema: buildFederatedSchema([graphqlModule]),
+  });
+}
 /**
  * @return Config
  */
@@ -73,13 +81,14 @@ export function createGatewayCommand(): Command {
       .createCommand('gateway')
       .description('Start GraphQL API based on Apollo server with schema federatio')
       .action((opts) => {
-        new ApolloServer({
+        const config: Config = {
           ...createConfigFromOpts(opts),
           gateway,
           engine: {
             apiKey: process.env.ENGINE_API_KEY,
           },
-        })
+        };
+        createApolloServer(config)
           .listen(opts.port)
           .then((info) => console.log(`🚀 Apollo Gateway is running ${info.url}`));
       }),
@@ -94,15 +103,10 @@ export function createServerCommand(): Command {
     program
       .createCommand('server')
       .description('Start GraphQL API based on Apollo server with schema federatio')
-      .action((opts) => {
-        new ApolloServer({
-          ...createConfigFromOpts(opts),
-          dataSources,
-          engine: false,
-          schema: buildFederatedSchema([graphqlModule]),
-        })
+      .action((opts) =>
+        createApolloServer(createConfigFromOpts(opts))
           .listen(opts.port)
-          .then((info) => console.log(`🚀 Apollo Server is running ${info.url}`));
-      }),
+          .then((info) => console.log(`🚀 Apollo Server is running ${info.url}`)),
+      ),
   );
 }
