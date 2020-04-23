@@ -13,15 +13,18 @@
       }
     },
     "faker": {
-      "name": "GraphQL API Fake",
+      "name": "GraphQL API Faker",
       "schemaPath": "./faker/schema.graphql",
       "includes": [
         "./faker/extension.graphql"
       ],
+      "excludes": [
+        "./gateway/schema.graphql"
+      ],
       "extensions": {
         "endpoints": {
           "local": {
-            "url": "http://localhost:9000/graphql"
+            "url": "http://localhost:4002/graphql"
           }
         }
       }

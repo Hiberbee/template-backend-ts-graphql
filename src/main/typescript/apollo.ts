@@ -64,7 +64,7 @@ function createConfigFromOpts(opts: any): Config {
  */
 function decorateWithOptions(command): Command {
   return command
-    .version('0.14.0')
+    .version('0.14.1')
     .requiredOption('-p, --port <port>', 'Server port', '4000')
     .requiredOption('-s, --storage <"redis" | "memcached" | "memory">', 'Cache storage for cache', 'memory')
     .option('-d, --debug', 'Enables debugging', false)

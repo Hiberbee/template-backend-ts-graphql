@@ -4,8 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 module.exports = {
   devtool: 'source-map',
-  entry: [path.join(__dirname, 'src/main/typescript/index.ts')],
-  mode: 'production',
   externals: [nodeExternals()],
   plugins: [new CleanWebpackPlugin()],
   module: {
@@ -15,11 +13,7 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
       },
-      {
-        test: /\.graphql$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        loader: 'graphql-tag/loader',
-      },
+      { test: /\.graphql?$/, loader: 'webpack-graphql-loader', options: { output: 'document' } },
     ],
   },
   output: {
@@ -27,7 +21,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
   },
   resolve: {
-    extensions: ['.ts', '.js', '.graphql'],
+    extensions: ['.ts', '.js', '.json', '.graphql'],
   },
   target: 'node',
 };

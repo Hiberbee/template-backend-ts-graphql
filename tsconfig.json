@@ -1,26 +1,44 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "allowJs": true,
     "alwaysStrict": true,
-    "resolveJsonModule": true,
     "baseUrl": "",
+    "outDir": "build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["dom", "ES6"],
-    "typeRoots": ["node_modules/@types"],
+    "lib": [
+      "dom",
+      "ES6"
+    ],
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "noImplicitThis": true,
-    "noImplicitAny": false,
     "noEmit": false,
-    "sourceMap": false,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types/typescript"
+    ],
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ES6",
-    "rootDirs": ["src"]
+    "target": "ES2015",
+    "removeComments": true,
+    "rootDirs": [
+      "src/main",
+      "src/types"
+    ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "templates", "build", "src/main/graphql"]
+  "files": [
+    "src/types/typescript/graphql.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/*"
+  ]
 }

@@ -16,10 +16,10 @@ environment: production
 
 applications:
   faker:
-    port: 9000
+    port: 4002
     command: "start:faker"
   server:
-    port: 8000
+    port: 4001
     command: "start:server"
   gateway:
     port: 4000

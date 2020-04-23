@@ -32,8 +32,10 @@ RUN cd /tmp \
 COPY . .
 RUN yarn build \
  && yarn install --production --ignore-scripts --prefer-offline
+
+FROM node:${nodeVersion}-alpine
 EXPOSE 4000
 STOPSIGNAL SIGTERM
 ENTRYPOINT ["yarn"]
-CMD ["start:server"]
+CMD ["start"]
 

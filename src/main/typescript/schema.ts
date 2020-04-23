@@ -25,12 +25,9 @@
 
 import { GraphQLSchemaModule } from 'apollo-graphql';
 import { Query, Application, User } from './types';
-import { gql } from 'apollo-server';
 import { Response } from 'express';
 import { ApolloGateway } from '@apollo/gateway';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const typeDefs = gql(require('../graphql/gateway/schema.graphql'));
+import typeDefs from './../graphql/gateway/schema.graphql';
 
 export const dataSources: () => {} = () => services;
 

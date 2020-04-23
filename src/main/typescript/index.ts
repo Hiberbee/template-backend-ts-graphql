@@ -1,5 +1,6 @@
 import { createGatewayCommand, createServerCommand } from './apollo';
 import { program } from 'commander';
+
 program
   .name(process.env.APP_NAME ?? 'graphql')
   .version(process.env.APP_VERSION ?? '')

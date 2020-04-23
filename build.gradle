@@ -27,7 +27,15 @@ idea {
   }
   module {
     excludeDirs += files("build", "gradle", ".gradle")
-    sourceDirs += files("src/main/typescript", "src/main/graphql")
+    sourceDirs += files("src/main/typescript", "src/types/typescript", "src/main/graphql")
+  }
+}
+
+sourceSets {
+  types {
+    java {
+      srcDirs += file("src/types/typescript")
+    }
   }
 }
 
