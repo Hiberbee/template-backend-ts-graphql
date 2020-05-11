@@ -17,6 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/container-actions@v1
+      - uses: actions/container-action@v1
         with:
           image: hiberbee/graphql
