@@ -47,7 +47,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
-    "@apollo/federation": "^0.15",
+    "@apollo/federation": "^0.16",
     "@apollo/gateway": "^0.15",
     "@graphql-codegen/cli": "^1.13",
     "@graphql-codegen/typescript": "^1.13",
