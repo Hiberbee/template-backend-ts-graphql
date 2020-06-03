@@ -41,7 +41,7 @@
     "apollo-server-plugin-response-cache": "^0.5",
     "commander": "^5.1",
     "graphql": "^15.0",
-    "graphql-faker": "^2.0.0-rc.17",
+    "graphql-faker": "^2.0.0-rc.21",
     "jsonwebtoken": "^8.5"
   },
   "devDependencies": {
