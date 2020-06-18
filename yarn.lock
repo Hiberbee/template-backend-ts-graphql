@@ -3,12 +3,12 @@
 
 
 "@apollo/federation@^0.16", "@apollo/federation@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@apollo/federation/-/federation-0.16.0.tgz#ce20c52d2f0368eb086465a9098ba2fa8038bfe9"
-  integrity sha512-+UA9QQNA4q896OOmyFHhKTf7iOIFvjL+h/I7ozRkA+Ayv1368pXtd3zyeKrXtUKD21a1vtEkEjCUX9aDGR8cqg==
+  version "0.16.8"
+  resolved "https://registry.yarnpkg.com/@apollo/federation/-/federation-0.16.8.tgz#c70efa20e2a27de3ebb801ab5c9046c23e1e13c5"
+  integrity sha512-kaGyvKGHeu3J4MGr/heEc+e1NfG57hkRHN1MmBT6XQMcMVt4+IaDlbZCVQ5rpe69Foj1IVsOQGOSw9fLfUnJAw==
   dependencies:
     apollo-graphql "^0.4.0"
-    apollo-server-env "^2.4.4-alpha.0"
+    apollo-server-env "^2.4.4"
     core-js "^3.4.0"
     lodash.xorby "^4.7.0"
 
@@ -2244,18 +2244,10 @@ apollo-server-env@2.0.3:
     node-fetch "^2.1.2"
     util.promisify "^1.0.0"
 
-apollo-server-env@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-2.4.3.tgz#9bceedaae07eafb96becdfd478f8d92617d825d2"
-  integrity sha512-23R5Xo9OMYX0iyTu2/qT0EUb+AULCBriA9w8HDfMoChB8M+lFClqUkYtaTTHDfp6eoARLW8kDBhPOBavsvKAjA==
-  dependencies:
-    node-fetch "^2.1.2"
-    util.promisify "^1.0.0"
-
-apollo-server-env@^2.4.4-alpha.0:
-  version "2.4.4-alpha.0"
-  resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-2.4.4-alpha.0.tgz#56e860b6af116cdbd05fc4bfe51d5851bde2413e"
-  integrity sha512-KoxYIYCZWh3oXDrsh/V43DVgTIo02XGEaLlNuwPMzPxwRA7id1wxcNInqISvd8Os8uoJSGuxkMCCs21UMOpnFw==
+apollo-server-env@^2.4.3, apollo-server-env@^2.4.4, apollo-server-env@^2.4.4-alpha.0:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-2.4.4.tgz#12d2d0896dcb184478cba066c7a683ab18689ca1"
+  integrity sha512-c2oddDS3lwAl6QNCIKCLEzt/dF9M3/tjjYRVdxOVN20TidybI7rAbnT4QOzf4tORnGXtiznEAvr/Kc9ahhKADg==
   dependencies:
     node-fetch "^2.1.2"
     util.promisify "^1.0.0"
