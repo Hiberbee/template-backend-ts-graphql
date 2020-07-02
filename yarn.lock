@@ -2474,12 +2474,12 @@ apollo-link@^1.2.1, apollo-link@^1.2.12, apollo-link@^1.2.14, apollo-link@^1.2.2
     zen-observable-ts "^0.8.21"
 
 apollo-server-cache-memcached@^0.6:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/apollo-server-cache-memcached/-/apollo-server-cache-memcached-0.6.5.tgz#f1758be86066857b660312f9bf5ad16c61f03064"
-  integrity sha512-WZ6eiM6si7Evp4BClvPbUE41JEMLaRE76WgiKB6GVTkIzLrSHGv6vk19GfDsvixSehe20YawUU6P18SezoU8kQ==
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/apollo-server-cache-memcached/-/apollo-server-cache-memcached-0.6.6.tgz#2ed60d71d7644de842da68af9f9003683b4ca608"
+  integrity sha512-R6AkLK1kjRP0qF3ne/1LNZbA5MszD6ACBO5qZDbgC/SSc3mje6wyehX5gg4yA0yfWiYbfx2j+rcSLbVw4Vn57Q==
   dependencies:
-    apollo-server-caching "^0.5.1"
-    apollo-server-env "^2.4.4"
+    apollo-server-caching "^0.5.2"
+    apollo-server-env "^2.4.5"
     memcached "^2.2.2"
 
 apollo-server-cache-redis@^1.2:
