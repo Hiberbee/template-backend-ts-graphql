@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@apollo/federation": "^0.16",
-    "@apollo/gateway": "^0.16",
+    "@apollo/gateway": "^0.17",
     "@graphql-codegen/cli": "^1.15",
     "@graphql-codegen/typescript": "^1.15",
     "@types/body-parser": "^1.19",
