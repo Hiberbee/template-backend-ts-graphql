@@ -79,7 +79,7 @@
     "webpack-cli": "^3.3",
     "webpack-graphql-loader": "^1.0",
     "webpack-hot-middleware": "^2.25",
-    "webpack-merge": "^4.2",
+    "webpack-merge": "^5.0",
     "webpack-node-externals": "^2.5"
   },
   "main": "./build/index.js",
