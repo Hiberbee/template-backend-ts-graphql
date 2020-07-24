@@ -26,10 +26,11 @@ import { Command, program } from 'commander';
 import { buildFederatedSchema } from '@apollo/federation';
 import { ApolloServer, Config } from 'apollo-server';
 import playgroundSettings from '../resources/playground.settings.json';
-import { cacheControl, createCache } from './cache';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
+import { InMemoryLRUCache } from 'apollo-server-caching';
 import { context } from './context';
 import { dataSources, graphqlModule, gateway } from './schema';
+import { CacheControlExtensionOptions } from 'apollo-cache-control';
 
 export function createApolloServer(config: Config): ApolloServer {
   return new ApolloServer({
@@ -39,11 +40,17 @@ export function createApolloServer(config: Config): ApolloServer {
     schema: buildFederatedSchema([graphqlModule]),
   });
 }
+
 /**
  * @return Config
  */
 function createConfigFromOpts(opts: any): Config {
-  const cache = createCache(opts.storage);
+  const cache = new InMemoryLRUCache();
+  const cacheControl: CacheControlExtensionOptions = {
+    defaultMaxAge: 0,
+    stripFormattedExtensions: false,
+  };
+
   return {
     cache,
     cacheControl,

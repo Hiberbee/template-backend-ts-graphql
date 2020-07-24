@@ -27,40 +27,15 @@ import { RedisCache } from 'apollo-server-cache-redis';
 import { MemcachedCache } from 'apollo-server-cache-memcached';
 import { CacheControlExtensionOptions } from 'apollo-cache-control';
 
-type CacheType = 'redis' | 'memcached' | 'memory';
-
 function createInMemoryCache(): KeyValueCache {
   return new InMemoryLRUCache();
 }
 
-function createRedisCache(): KeyValueCache {
-  return new RedisCache({
-    host: process.env.REDIS_SERVICE_HOST ?? 'localhost',
-    port: Number.parseInt(process.env.REDIS_SERVICE_PORT ?? '6379'),
-    password: process.env.REDIS_PASSWORD,
-    db: Number.parseInt(process.env.REDIS_DATABASE ?? '0'),
-    enableReadyCheck: true,
-  });
-}
-
-function createMemcachedCache(): KeyValueCache {
-  const url = `${process.env.MEMCACHED_SERVICE_HOST ?? 'localhost'}:${process.env.MEMCACHED_SERVICE_PORT ?? 11211}`;
-  return new MemcachedCache(url);
-}
 export const cacheControl: CacheControlExtensionOptions = {
   defaultMaxAge: 0,
   stripFormattedExtensions: false,
 };
 
-export function createCache(storage?: CacheType): KeyValueCache {
-  switch (storage) {
-    case 'memcached':
-      return createMemcachedCache();
-    case 'redis':
-      return createRedisCache();
-    case 'memory':
-    case undefined:
-    default:
-      return createInMemoryCache();
-  }
+export function createCache(): KeyValueCache {
+  return createInMemoryCache();
 }

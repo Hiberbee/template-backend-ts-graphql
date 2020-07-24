@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const webpack = require('webpack');
 
-module.exports = merge.smart(common, {
+module.exports = merge.merge(common, {
   devtool: 'inline-source-map',
   mode: 'development',
   entry: ['webpack/hot/poll?1000', path.join(__dirname, 'src/main/typescript/index.ts')],
