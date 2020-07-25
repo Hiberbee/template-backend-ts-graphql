@@ -25,10 +25,7 @@
     "strict": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ES2015",
+    "target": "ES6",
     "removeComments": true
-  },
-  "include": [
-    "src/*"
-  ]
+  }
 }
