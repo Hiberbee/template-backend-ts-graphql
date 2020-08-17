@@ -52,7 +52,7 @@
     "@types/graphql-iso-date": "^3.4.0",
     "@types/ioredis": "^4.17.3",
     "@types/istanbul-lib-coverage": "^2.0.3",
-    "@types/jest": "^26.0.9",
+    "@types/jest": "^26.0.10",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/memcached": "^2.2.6",
     "@types/node": "^14.0.27",
