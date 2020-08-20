@@ -22,20 +22,18 @@
  * SOFTWARE.
  */
 
-import { KeyValueCache, InMemoryLRUCache } from 'apollo-server-caching';
-import { RedisCache } from 'apollo-server-cache-redis';
-import { MemcachedCache } from 'apollo-server-cache-memcached';
-import { CacheControlExtensionOptions } from 'apollo-cache-control';
+import { KeyValueCache, InMemoryLRUCache } from 'apollo-server-caching'
+import { CacheControlExtensionOptions } from 'apollo-cache-control'
 
 function createInMemoryCache(): KeyValueCache {
-  return new InMemoryLRUCache();
+  return new InMemoryLRUCache()
 }
 
 export const cacheControl: CacheControlExtensionOptions = {
   defaultMaxAge: 0,
   stripFormattedExtensions: false,
-};
+}
 
 export function createCache(): KeyValueCache {
-  return createInMemoryCache();
+  return createInMemoryCache()
 }

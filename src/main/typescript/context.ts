@@ -22,26 +22,26 @@
  * SOFTWARE.
  */
 
-import { Request, Response } from 'express';
-import { Algorithm, verify } from 'jsonwebtoken';
+import { Request, Response } from 'express'
+import { Algorithm, verify } from 'jsonwebtoken'
 
 export const context = ({ req, res }: { req: Request; res: Response }): any => {
-  const authHeader = req.headers.authorization || '';
+  const authHeader = req.headers.authorization || ''
   if (authHeader !== '') {
-    const bearerToken = authHeader.split(' ');
-    const secretOrPublicKey = process.env.API_KEY ?? '';
+    const bearerToken = authHeader.split(' ')
+    const secretOrPublicKey = process.env.API_KEY ?? ''
     if (secretOrPublicKey) {
-      const options = { algorithms: [(process.env.JWT_ALGORITHM as Algorithm) || 'HS512'] };
-      const usernameClaim = process.env.API_USER_CLAIM_ID || 'username';
-      const rolesClaim = process.env.API_USER_CLAIM_ROLES || 'roles';
-      const token = bearerToken.length === 2 || bearerToken[0].toLowerCase() === 'bearer' ? bearerToken[1] : process.env.API_TOKEN;
+      const options = { algorithms: [(process.env.JWT_ALGORITHM as Algorithm) || 'HS512'] }
+      const usernameClaim = process.env.API_USER_CLAIM_ID || 'username'
+      const rolesClaim = process.env.API_USER_CLAIM_ROLES || 'roles'
+      const token = bearerToken.length === 2 || bearerToken[0].toLowerCase() === 'bearer' ? bearerToken[1] : process.env.API_TOKEN
       if (token) {
         verify(token, secretOrPublicKey, options, (error, user: any) => {
-          error !== null ? console.log(error) : res.header('X-User-Id', user[usernameClaim]).header('X-User-Roles', user[rolesClaim]);
-        });
+          error !== null ? console.log(error) : res.header('X-User-Id', user[usernameClaim]).header('X-User-Roles', user[rolesClaim])
+        })
       }
     }
   }
-  res.header('X-App-Id', process.env.APP_NAME ?? 'hiberbee-graphql');
-  return { req, res };
-};
+  res.header('X-App-Id', process.env.APP_NAME ?? 'hiberbee-graphql')
+  return { req, res }
+}

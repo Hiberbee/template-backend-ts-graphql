@@ -23,15 +23,15 @@
  * SOFTWARE.
  */
 
-import { GraphQLSchemaModule } from 'apollo-graphql';
-import { Query, Application, User } from './types';
-import { Response } from 'express';
-import { ApolloGateway } from '@apollo/gateway';
-import typeDefs from './../graphql/gateway/schema.graphql';
+import { GraphQLSchemaModule } from 'apollo-graphql'
+import { Query, Application, User } from './types'
+import { Response } from 'express'
+import { ApolloGateway } from '@apollo/gateway'
+import typeDefs from './../graphql/gateway/schema.graphql'
 
-export const dataSources: () => {} = () => services;
+export const dataSources: () => {} = () => services
 
-const services: {} = {};
+const services: {} = {}
 
 export const gateway = new ApolloGateway({
   serviceList: [{ name: 'hiberbee', url: 'http://127.0.0.1:8000/graphql' }],
@@ -39,26 +39,26 @@ export const gateway = new ApolloGateway({
   experimental_autoFragmentization: true,
   serviceHealthCheck: true,
   __exposeQueryPlanExperimental: true,
-});
+})
 
 export const resolvers: any = {
   Query: {
     app: (root: Query, args: null, context: { res: Response }): Application => {
-      const { res } = context;
+      const { res } = context
       return {
         id: res.get('X-App-Id'),
         version: process.env.APP_VERSION ?? new Date().toISOString(),
-      };
+      }
     },
     me: (root: Query, args, context: { res: Response }): User => {
-      const { res } = context;
+      const { res } = context
       return {
         id: res.get('X-User-Id'),
         roles: res.get('X-User-Roles')?.toString().split(','),
-      };
+      }
     },
   },
   Mutation: {},
-};
+}
 
-export const graphqlModule: GraphQLSchemaModule = { resolvers, typeDefs };
+export const graphqlModule: GraphQLSchemaModule = { resolvers, typeDefs }

@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { Command, program } from 'commander';
-import { buildFederatedSchema } from '@apollo/federation';
-import { ApolloServer, Config } from 'apollo-server';
-import playgroundSettings from '../resources/playground.settings.json';
-import responseCachePlugin from 'apollo-server-plugin-response-cache';
-import { InMemoryLRUCache } from 'apollo-server-caching';
-import { context } from './context';
-import { dataSources, graphqlModule, gateway } from './schema';
-import { CacheControlExtensionOptions } from 'apollo-cache-control';
+import { Command, program } from 'commander'
+import { buildFederatedSchema } from '@apollo/federation'
+import { ApolloServer, Config } from 'apollo-server'
+import playgroundSettings from '../resources/playground.settings.json'
+import responseCachePlugin from 'apollo-server-plugin-response-cache'
+import { InMemoryLRUCache } from 'apollo-server-caching'
+import { context } from './context'
+import { dataSources, graphqlModule, gateway } from './schema'
+import { CacheControlExtensionOptions } from 'apollo-cache-control'
 
 export function createApolloServer(config: Config): ApolloServer {
   return new ApolloServer({
@@ -38,18 +38,18 @@ export function createApolloServer(config: Config): ApolloServer {
     dataSources,
     engine: false,
     schema: buildFederatedSchema([graphqlModule]),
-  });
+  })
 }
 
 /**
  * @return Config
  */
 function createConfigFromOpts(opts: any): Config {
-  const cache = new InMemoryLRUCache();
+  const cache = new InMemoryLRUCache()
   const cacheControl: CacheControlExtensionOptions = {
     defaultMaxAge: 0,
     stripFormattedExtensions: false,
-  };
+  }
 
   return {
     cache,
@@ -63,7 +63,7 @@ function createConfigFromOpts(opts: any): Config {
     subscriptions: false,
     tracing: opts.tracing,
     uploads: opts.uploads,
-  };
+  }
 }
 
 /**
@@ -79,7 +79,7 @@ function decorateWithOptions(command): Command {
     .option('-i, --introspection', 'Enables schema introspection', false)
     .option('-r, --cors', 'Enable CORS support', false)
     .option('-t, --tracing', 'Enable query tracing', false)
-    .option('-u, --uploads', 'Enable file uploads', false);
+    .option('-u, --uploads', 'Enable file uploads', false)
 }
 
 export function createGatewayCommand(): Command {
@@ -94,16 +94,16 @@ export function createGatewayCommand(): Command {
           engine: {
             apiKey: process.env.ENGINE_API_KEY,
           },
-        };
+        }
         createApolloServer(config)
           .listen(opts.port)
-          .then((info) => console.log(`🚀 Apollo Gateway is running ${info.url}`));
+          .then((info) => console.log(`🚀 Apollo Gateway is running ${info.url}`))
       }),
-  );
+  )
 }
 
 /**
- * @return Command
+ * @return string Command
  */
 export function createServerCommand(): Command {
   return decorateWithOptions(
@@ -115,5 +115,5 @@ export function createServerCommand(): Command {
           .listen(opts.port)
           .then((info) => console.log(`🚀 Apollo Server is running ${info.url}`)),
       ),
-  );
+  )
 }
